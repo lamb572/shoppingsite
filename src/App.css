@@ -1,6 +1,8 @@
-.App{
-  display: flex;
-  flex-flow: row wrap;
+
+.Register, .Signin{
+  display: grid;
+  justify-content: center;
+  margin-top: 2em;
 }
 
 
@@ -69,4 +71,5 @@ dd {
 dd {
   margin-bottom: 1em;
 }
+
 
