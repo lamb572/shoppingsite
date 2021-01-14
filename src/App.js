@@ -109,3 +109,13 @@ function App() {
 };
 
 export default App;
+
+
+
+// TODO!!
+// - load picture of url!
+// -build shopping basket!
+// -build add to cart!
+// my account
+// build sql table(foodsite) for registration and passwords
+//build up backend to allow and verify signin 
