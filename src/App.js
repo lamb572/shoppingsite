@@ -6,15 +6,16 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Register from './components/Register/Register';
 import SignIn from './components/SignIn/SiginIn';
+import FaceDetect from './components/FoodDetect/FoodDetect'
 
 
 
 function App() {
-  const [route, setRoute] = useState('register');
+  const [route, setRoute] = useState('mainpage');
   const [searchfield, setSearchfield] = useState([null]);
   const [searchfieldValue, setSearchfieldValue] = useState('');
   const [foodDeal, setFoodDeal]= useState(true);
-  const [signIn, setSignIn]= useState(true);
+  const [signIn, setSignIn]= useState(false);
 
   const setMainPage = (i) =>{
     if(i === ""){
@@ -48,11 +49,22 @@ function App() {
 
   return (
     <div >
-      <Navigation onSearch={onSearchChange} searchFieldchange={searchFieldchange} searchfieldValue={searchfieldValue} onClickType={onClickType} signIn={signIn} setRoute={setRoute} className="position-sticky "/>
+      <Navigation 
+        onSearch={onSearchChange} 
+        searchFieldchange={searchFieldchange} 
+        searchfieldValue={searchfieldValue} 
+        onClickType={onClickType} 
+        signIn={signIn} 
+        setRoute={setRoute}
+        setSignIn={setSignIn}
+        setFoodDeal={setFoodDeal} 
+        className="position-sticky "
+      />
       { route === 'mainpage'
         ?<MainBody  filterFoodList={filterFoodList} foodDeal={foodDeal} />
         : route === 'register' ?<Register />
         : route === 'signin' ?<SignIn />
+        : route === 'facedetect' ?<FaceDetect/>
         : null
       }
       
