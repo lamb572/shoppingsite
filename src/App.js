@@ -18,8 +18,8 @@ function App() {
   const [searchfieldValue, setSearchfieldValue] = useState('');
   const [foodDeal, setFoodDeal]= useState(true);
   const [signIn, setSignIn]= useState(false);
-  const [itemsDetected, setItemsDetected] = useState('');
-  const [filteredItems, setFilterItems] = useState('')
+  const [itemsDetected, setItemsDetected] = useState([null]);
+  // const [filteredItems, setFilterItems] = useState('')
   const [url, setUrl] =useState();
 
   const setMainPage = (i) =>{
@@ -51,7 +51,7 @@ function App() {
   };
 
   const onSubmit = () => {
-    setItemsDetected('')  
+    setItemsDetected([null])  
     fetch('http://localhost:3001/imageurl', {
         method: 'post',
         headers:{'Content-Type': 'application/json'},
@@ -63,15 +63,12 @@ function App() {
     .then( response => setItemsDetected(response.filter(i => i.value > 0.9).map(i => i.name)))
     .catch(err => console.log(err));  
 
-    console.log(itemsDetected)
-
-    setFilterItems(foodList.filter(food =>{ 
-      let search = (e) => food.food.toLowerCase().includes(e); 
-      return itemsDetected.some(search);
-    }));
-
   }
 
+  const filteredItems = foodList.filter(food =>{ 
+    let search = (e) => food.food.toLowerCase().includes(e); 
+    return itemsDetected.some(search);
+  });
   
 
   return (
@@ -97,7 +94,7 @@ function App() {
           ? filteredItems.length < 1 
             ? <FaceDetect setUrl={setUrl} onSubmit={onSubmit}/> 
             : <div>
-                <FaceDetect setUrl={setUrl} onSubmit={onSubmit}/> 
+                <FaceDetect url={url} setUrl={setUrl} onSubmit={onSubmit}/> 
                 <DetectedList filteredItems={filteredItems}/>
               </div>
         : null
@@ -113,7 +110,6 @@ export default App;
 
 
 // TODO!!
-// - load picture of url!
 // -build shopping basket!
 // -build add to cart!
 // my account

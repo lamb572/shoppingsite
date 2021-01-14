@@ -5,7 +5,9 @@ import Food from '../Food/Food';
 const DetectedList =({filteredItems}) =>{
 
     return(
-        <div className="food-card" >
+        <div className="shadow p-3 mb-5 mt-2 bg-white rounded" >
+            <h2>Results from the store</h2>
+            <div className="food-card">
             {
             filteredItems.map((user, i) => {
               return (
@@ -20,6 +22,7 @@ const DetectedList =({filteredItems}) =>{
               );
             })
           }
+            </div>
         </div>
         
     )
