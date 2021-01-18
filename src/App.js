@@ -9,6 +9,8 @@ import FaceDetect from './components/FoodDetect/FoodDetect'
 import Deal from './components/Deal/Deal';
 import FoodCards from './components/FoodCards/FoodCards';
 import DetectedList from './components/DetectedList/DetectedList';
+import Footer from './components/Footer/Footer';
+import Basket from './components/Basket/Basket';
 
 
 
@@ -19,8 +21,12 @@ function App() {
   const [foodDeal, setFoodDeal]= useState(true);
   const [signIn, setSignIn]= useState(false);
   const [itemsDetected, setItemsDetected] = useState([null]);
-  // const [filteredItems, setFilterItems] = useState('')
   const [url, setUrl] =useState();
+  const [basketList, setBasketList] = useState([]);
+
+
+
+
 
   const setMainPage = (i) =>{
     if(i === ""){
@@ -69,7 +75,25 @@ function App() {
     let search = (e) => food.food.toLowerCase().includes(e); 
     return itemsDetected.some(search);
   });
-  
+
+
+  const basketClick = ({food, price}) =>{ 
+    if (basketList.some(prod => prod.food === food)){
+      setBasketList(
+        basketList.map(item => {
+          let newItem = {'food':food, 'price':price, 'qty':item.qty +1, 'totalprice':item.price + price}
+          if(item.food === food){
+            return newItem
+          }else{
+            return item
+          }
+        })
+      )
+      }else{
+        setBasketList([...basketList, {'food':food, 'price':price, 'qty':1, 'totalprice':price}])
+    }
+  };
+  console.log(basketList)
 
   return (
     <div >
@@ -87,7 +111,10 @@ function App() {
       { route === 'mainpage'
         ? foodDeal 
           ?<Deal/>
-          :<FoodCards filterFoodList={filterFoodList}/>
+          :<FoodCards 
+            filterFoodList={filterFoodList}
+            basketClick={basketClick}
+            />
         : route === 'register' ?<Register />
         : route === 'signin' ?<SignIn />
         : route === 'facedetect' 
@@ -95,11 +122,12 @@ function App() {
             ? <FaceDetect setUrl={setUrl} onSubmit={onSubmit}/> 
             : <div>
                 <FaceDetect url={url} setUrl={setUrl} onSubmit={onSubmit}/> 
-                <DetectedList filteredItems={filteredItems}/>
+                <DetectedList filteredItems={filteredItems} basketClick={basketClick}/>
               </div>
-        : null
+        : route === 'basket' ?<Basket basketList={basketList} />
+        :null
       }
-      
+      <Footer />
     </div> 
   );
 
@@ -112,6 +140,7 @@ export default App;
 // TODO!!
 // -build shopping basket!
 // -build add to cart!
+// animate the shopping basket when item added
 // my account
 // build sql table(foodsite) for registration and passwords
 //build up backend to allow and verify signin 

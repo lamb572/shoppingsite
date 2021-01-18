@@ -4,7 +4,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
 import Nav from 'react-bootstrap/Nav';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+import basket from '../../images/shopping-basket.png';
 
 
 const Navigation =({searchfieldValue, searchFieldchange, onSearch, onClickType ,signIn, setRoute, setSignIn, setFoodDeal}) => {
@@ -62,17 +63,22 @@ const Navigation =({searchfieldValue, searchFieldchange, onSearch, onClickType ,
           </Form>
 
           {signIn
-            ? <Nav>
+            ?<Nav>
+                <Nav.Link onClick={() => setRoute('basket')}>
+                  <img id="bskt" src={basket} alt="basket" style={{height:"1.5em", width:"auto" }}></img>
+                </Nav.Link>
                 <Nav.Link >My Account</Nav.Link>
                 <Nav.Link  onClick={() => setRoute('signin')}>Sign In</Nav.Link>
                 <Nav.Link  onClick={() => setRoute('register')}>Register</Nav.Link>
               </Nav>
             :<Nav>
-              <Nav.Link >My Account</Nav.Link>
-              <Nav.Link  onClick={() => setSignIn(true) }>Sign Out</Nav.Link>
+                <Nav.Link onClick={() => setRoute('basket')}>
+                  <img id="bskt" src={basket} alt="basket" style={{height:"1.5em", width:"auto" }}></img>
+                </Nav.Link>
+                <Nav.Link >My Account</Nav.Link>
+                <Nav.Link  onClick={() => setSignIn(true) }>Sign Out</Nav.Link>
             </Nav>
             }
-
         </Navbar.Collapse>
       </Navbar>
      

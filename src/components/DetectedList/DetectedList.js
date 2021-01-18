@@ -2,7 +2,7 @@ import React from 'react';
 import Food from '../Food/Food';
 
 
-const DetectedList =({filteredItems}) =>{
+const DetectedList =({filteredItems, basketClick}) =>{
 
     return(
         <div className="shadow p-3 mb-5 mt-2 bg-white rounded" >
@@ -12,6 +12,7 @@ const DetectedList =({filteredItems}) =>{
             filteredItems.map((user, i) => {
               return (
                 <Food
+                  basketClick={basketClick}
                   keys={i}
                   food={filteredItems[i].food}
                   price={filteredItems[i].price}

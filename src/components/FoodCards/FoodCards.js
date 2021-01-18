@@ -2,14 +2,15 @@ import React from 'react';
 import Food from '../Food/Food';
 
 
-const FoodCards =({filterFoodList}) =>{
+const FoodCards =({filterFoodList, basketClick}) =>{
 
     return(
         <div className="food-card" >
             {
             filterFoodList.map((user, i) => {
               return (
-                <Food
+                <Food 
+                  basketClick= {basketClick}
                   keys={i}
                   food={filterFoodList[i].food}
                   price={filterFoodList[i].price}

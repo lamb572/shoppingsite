@@ -1,0 +1,7 @@
+.food-img{
+    display: flex;
+    justify-content: flex-end;
+}
+.food-img:hover{
+    cursor: pointer;
+}

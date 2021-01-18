@@ -1,6 +1,7 @@
 import React from 'react';
-
-const Food =({food, price, qty, uoi, image, keys}) =>{
+import addBasket from '../../images/add-to-basket.png';
+import './Food.css';
+const Food =({food, price, qty, uoi, image, keys, basketClick}) =>{
 
     return(
         <div className="food" key={keys.toString()}>
@@ -15,7 +16,16 @@ const Food =({food, price, qty, uoi, image, keys}) =>{
                 <dd>{qty}</dd>
                 <dt>Unit of Purchase:</dt>
                 <dd>{uoi.toUpperCase()}</dd>
+                
             </dl>
+            <div className="food-img">
+                <img
+                onClick={() => basketClick({food, price})} 
+                src={addBasket} 
+                alt="addtobasket" 
+                style={{height:"1.5em", width:"auto" }}
+                ></img>
+            </div>
         </div>
     )
 
