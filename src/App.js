@@ -138,9 +138,9 @@ export default App;
 
 
 // TODO!!
-// -build shopping basket!
-// -build add to cart!
-// animate the shopping basket when item added
-// my account
 // build sql table(foodsite) for registration and passwords
+// my account
 //build up backend to allow and verify signin 
+// animate the shopping basket when item added
+// adjust qty or remove items from basket
+// 
