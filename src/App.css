@@ -1,10 +1,18 @@
 
-.Register, .Signin{
+.Register, .myaccount,  .Signin{
   display: grid;
   justify-content: center;
   margin-top: 2em;
 }
 
+.myaccount{
+  min-height: 100vh;
+}
+
+.myaccount-form{
+  min-width: 50vw;
+
+}
 
 .menu-body{
   display: flex;
@@ -76,4 +84,3 @@ dd {
   color:red;
   font-weight: bold;
 }
-

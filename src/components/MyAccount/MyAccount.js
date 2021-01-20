@@ -105,8 +105,8 @@ const Register = ({setSignIn, setRoute, loadUser, user}) => {
     }
         
     return(
-        <div>
-            <Form noValidate validated={validated} onSubmit={handleSubmit}> 
+        <div className="myaccount">
+            <Form className="myaccount-form" noValidate validated={validated} onSubmit={handleSubmit}> 
             <Button onClick={showAndLoad}>Show Details:</Button>
           {detailShow
             ?<div>
@@ -139,8 +139,7 @@ const Register = ({setSignIn, setRoute, loadUser, user}) => {
                 :<div><Button onClick={() => setChangeInfo(true)}>Change User Info</Button>
                     <h4> Email: {email}</h4>
                     <h4> First Name: {name}</h4>
-                    <h4> Surname: {surname}</h4>
-                    
+                    <h4> Surname: {surname}</h4>  
                 </div>
                 } 
 

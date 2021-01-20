@@ -57,9 +57,7 @@ const Register = ({setSignIn, setRoute, loadUser}) => {
 
             }else{
                 console.log(user)
-            }
-
-            
+            }   
         })
         }
 

@@ -67,6 +67,7 @@ function App() {
   const onClickType = (type) => {
     setSearchfield([type]);
     setMainPage(type);
+    setRoute('mainpage');
   };
 
   const onSubmit = () => {
@@ -176,13 +177,10 @@ function App() {
 export default App;
 
 
-
 // TODO!!
-// my account-change information
-// organise my account(css)
+// my account- change information call back to SQL
+//organise my account(css)
 //build shipping table and if check box not clicked put billing info into shipping box's
-//build up backend to allow and verify signin
-// fix error when changing from any other page back to food 
 // animate the shopping basket when item added
 // adjust qty or remove items from basket
 // 
