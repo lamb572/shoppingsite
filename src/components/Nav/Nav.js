@@ -8,8 +8,12 @@ import Button from 'react-bootstrap/Button';
 import basket from '../../images/shopping-basket.png';
 
 
-const Navigation =({searchfieldValue, searchFieldchange, onSearch, onClickType ,signIn, setRoute, setSignIn, setFoodDeal}) => {
+const Navigation =({searchfieldValue, searchFieldchange, onSearch, onClickType ,signIn, setRoute, setSignIn, setFoodDeal, clearUser}) => {
     
+  const signOut = () =>{
+    setSignIn(false);
+    clearUser();
+  };
 
     return (
         <Navbar collapseOnSelect expand="lg" sticky="top" bg="light"  >
@@ -62,12 +66,11 @@ const Navigation =({searchfieldValue, searchFieldchange, onSearch, onClickType ,
             <Button variant="outline-success" onClick={onSearch}>Search</Button>
           </Form>
 
-          {signIn
+          {!signIn
             ?<Nav>
                 <Nav.Link onClick={() => setRoute('basket')}>
                   <img id="bskt" src={basket} alt="basket" style={{height:"1.5em", width:"auto" }}></img>
                 </Nav.Link>
-                <Nav.Link >My Account</Nav.Link>
                 <Nav.Link  onClick={() => setRoute('signin')}>Sign In</Nav.Link>
                 <Nav.Link  onClick={() => setRoute('register')}>Register</Nav.Link>
               </Nav>
@@ -75,8 +78,8 @@ const Navigation =({searchfieldValue, searchFieldchange, onSearch, onClickType ,
                 <Nav.Link onClick={() => setRoute('basket')}>
                   <img id="bskt" src={basket} alt="basket" style={{height:"1.5em", width:"auto" }}></img>
                 </Nav.Link>
-                <Nav.Link >My Account</Nav.Link>
-                <Nav.Link  onClick={() => setSignIn(true) }>Sign Out</Nav.Link>
+                <Nav.Link onClick={() => setRoute('myaccount')} >My Account</Nav.Link>
+                <Nav.Link  onClick={signOut} >Sign Out</Nav.Link>
             </Nav>
             }
         </Navbar.Collapse>

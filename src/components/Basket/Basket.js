@@ -3,20 +3,6 @@ import Table from 'react-bootstrap/Table'
 
 const Basket = ({basketList}) =>{
     
-const tableList = () => {
-    basketList.map(prod =>{
-        return (
-            <tr key={prod.food}> 
-                    <th>{prod.food}</th>
-                    <th>{prod.price}</th>
-                    <th>{prod.qty}</th>
-                    <th>{prod.totalprice}</th>
-                </tr>
-
-        )
-    })
-};
-
     
 
     return(

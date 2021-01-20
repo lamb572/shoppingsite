@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Navigation from "./components/Nav/Nav";
 import foodList from './foodList';
 import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.css";
 import Register from './components/Register/Register';
 import SignIn from './components/SignIn/SiginIn';
 import FaceDetect from './components/FoodDetect/FoodDetect'
@@ -11,6 +11,8 @@ import FoodCards from './components/FoodCards/FoodCards';
 import DetectedList from './components/DetectedList/DetectedList';
 import Footer from './components/Footer/Footer';
 import Basket from './components/Basket/Basket';
+import MyAccount from './components/MyAccount/MyAccount';
+
 
 
 
@@ -23,6 +25,17 @@ function App() {
   const [itemsDetected, setItemsDetected] = useState([null]);
   const [url, setUrl] =useState();
   const [basketList, setBasketList] = useState([]);
+  const [user , setUser] = useState({
+    name: '',
+    surname: '',
+    address:'',
+    address2:'',
+    town:'',
+    county:'', 
+    postcode:'',
+    email:''
+
+  });
 
 
 
@@ -71,6 +84,30 @@ function App() {
 
   }
 
+  const loadUser = (data) =>
+  setUser({
+    name: data.name,
+    surname: data.surname,
+    address:data.address,
+    address2:data.address2,
+    town:data.town,
+    county:data.county,
+    postcode:data.postcode,
+    email: data.email
+  })
+
+  const clearUser = () =>
+  setUser({
+    name: '',
+    surname: '',
+    address:'',
+    address2:'',
+    town:'',
+    county:'', 
+    postcode:'',
+    email:''
+  })
+
   const filteredItems = foodList.filter(food =>{ 
     let search = (e) => food.food.toLowerCase().includes(e); 
     return itemsDetected.some(search);
@@ -93,7 +130,8 @@ function App() {
         setBasketList([...basketList, {'food':food, 'price':price, 'qty':1, 'totalprice':price}])
     }
   };
-  console.log(basketList)
+
+  console.log(user)
 
   return (
     <div >
@@ -105,7 +143,8 @@ function App() {
         signIn={signIn} 
         setRoute={setRoute}
         setSignIn={setSignIn}
-        setFoodDeal={setFoodDeal} 
+        setFoodDeal={setFoodDeal}
+        clearUser={clearUser} 
         className="position-sticky "
       />
       { route === 'mainpage'
@@ -115,8 +154,8 @@ function App() {
             filterFoodList={filterFoodList}
             basketClick={basketClick}
             />
-        : route === 'register' ?<Register />
-        : route === 'signin' ?<SignIn />
+        : route === 'register' ?<Register setSignIn={setSignIn} setRoute={setRoute} loadUser={loadUser}/>
+        : route === 'signin' ?<SignIn setSignIn={setSignIn} setRoute={setRoute} loadUser={loadUser} />
         : route === 'facedetect' 
           ? filteredItems.length < 1 
             ? <FaceDetect setUrl={setUrl} onSubmit={onSubmit}/> 
@@ -125,6 +164,7 @@ function App() {
                 <DetectedList filteredItems={filteredItems} basketClick={basketClick}/>
               </div>
         : route === 'basket' ?<Basket basketList={basketList} />
+        : route === 'myaccount'?<MyAccount user={user} setSignIn={setSignIn} setRoute={setRoute} loadUser={loadUser} />
         :null
       }
       <Footer />
@@ -138,9 +178,11 @@ export default App;
 
 
 // TODO!!
-// build sql table(foodsite) for registration and passwords
-// my account
-//build up backend to allow and verify signin 
+// my account-change information
+// organise my account(css)
+//build shipping table and if check box not clicked put billing info into shipping box's
+//build up backend to allow and verify signin
+// fix error when changing from any other page back to food 
 // animate the shopping basket when item added
 // adjust qty or remove items from basket
 // 
