@@ -13,6 +13,7 @@ const Navigation =({searchfieldValue, searchFieldchange, onSearch, onClickType ,
   const signOut = () =>{
     setSignIn(false);
     clearUser();
+    setRoute('mainpage')
   };
 
     return (

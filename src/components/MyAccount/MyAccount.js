@@ -5,15 +5,18 @@ import Col from 'react-bootstrap/Col';
 
 
 
-const Register = ({setSignIn, setRoute, loadUser, user}) => {
+const Register = ({ setRoute, user}) => {
     const [detailShow, setDetailShow] =useState(false)
 
     const [email, setEmail] =useState('');
-    const [emailExists, setEmailExists] =useState(true)
+    const [emailExists, setEmailExists] =useState(true);
+    const [updateEmail, setUpdateEmail] = useState('');
 
     const [changePassword, setChangePassword] =useState(false)
     const [password, setPassword] =useState('');
     const [confirmPassword, setConfirmPassword] =useState('');
+    const [currentPassword, setCurrentPassword] =useState('')
+    const [oldPassword, setOldPassword] = useState(true);
 
     const [name, setName] =useState('');
     const [surname, setSurname] =useState('');
@@ -30,6 +33,29 @@ const Register = ({setSignIn, setRoute, loadUser, user}) => {
 
     const [validated, setValidated] = useState(false);
 
+    if(setRoute ==='mainpage'){
+        setDetailShow(false)
+        setEmail('');
+        setEmailExists(true);
+        setUpdateEmail('');
+        setChangePassword(false)
+        setPassword('');
+        setConfirmPassword('');
+        setCurrentPassword('')
+        setOldPassword(true);
+        setName('');
+        setSurname('');
+        setAddress('');
+        setAddress2('');
+        setTown('');
+        setCounty('');
+        setPostCode('');
+        setShowShipping(false);
+        setShowBilling(false);
+        setChangeInfo(false);
+        setValidated(false);
+    }
+
     const handleSubmit = (event) => {
         const form = event.currentTarget;
         if (form.checkValidity() === false) {
@@ -37,59 +63,78 @@ const Register = ({setSignIn, setRoute, loadUser, user}) => {
         event.stopPropagation();
         }else{
             setValidated(true);
-            fetch('http://localhost:3001/register', {
-            method: 'post',
-            headers:{'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                email: email,
-                password: password,
-                name: name,
-                surname: surname,
-                confirmPassword: confirmPassword,
-                address:address,
-                address2:address2,
-                town:town,
-                county:county, 
-                postcode:postCode
+            return true;
+           
+        }};
+
+    const saveDetails = (event) => {
+        if (handleSubmit(event)){   
+            fetch('http://localhost:3001/updateuserinfo', {
+                method: 'post',
+                headers:{'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    email: email,
+                    updateEmail: updateEmail,
+                    name: name,
+                    surname: surname,
+                })
             })
-        })
-        .then(response => response.json())
-        .then(user =>{
-            if (user.email ){
-                loadUser(user)
-                setSignIn(true)
-                setRoute('mainpage')
-            }else if(user === 'email'){ 
-                setEmailExists(false)
+            .then(response => response.json())
+            .then(user =>{
+                if(user === 'email'){ 
+                    setEmailExists(false)
+                }  
+            })
+        }};
 
-            }else{
-                console.log(user)
-            }           
-        })
-        }
-
-    };
-
-    const saveDetails = () => {
-
-    };
-
-    const saveAddress = () => {
-
-    };
+    const saveAddress = (event) => {
+        if (handleSubmit(event)){   
+            fetch('http://localhost:3001/updateaddress', {
+                method: 'post',
+                headers:{'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    email: email,
+                    address:address,
+                    address2:address2,
+                    town:town,
+                    county:county, 
+                    postcode:postCode
+                    
+                })
+            })
+            .then(response => response.json())
+        }};
 
     const saveShipAddress = () => {
 
     };
 
-    const savePassword = () => {
-
-    };
+    const savePassword = (event) => {
+        setOldPassword(true);
+        if (handleSubmit(event)){   
+            fetch('http://localhost:3001/updatepassword', {
+                method: 'post',
+                headers:{'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    email:email,
+                    password:password,
+                    currentPassword:currentPassword,
+                    confirmPassword:confirmPassword
+                })
+            })
+            .then(response => response.json())
+            .then(user =>{
+                if(user === 'wrongcredentials'){ 
+                    setOldPassword(false)
+                }  
+            })
+        }};
     
     const showAndLoad = () =>{
         if (!detailShow){
             setDetailShow(true)
             setEmail(user.email)
+            setUpdateEmail(user.email)
             setPassword(111111)
             setConfirmPassword(111111)
             setName(user.name)
@@ -119,7 +164,7 @@ const Register = ({setSignIn, setRoute, loadUser, user}) => {
                         ?<Form.Text className="error" > Email Already Exists</Form.Text> 
                         :null
                         }
-                    <Form.Control required value={email} onChange={(input) => setEmail(input.target.value)} type="email" placeholder="Enter email" />
+                    <Form.Control required value={updateEmail} onChange={(input) => setUpdateEmail(input.target.value)} type="email" placeholder="Enter email" />
                     </Form.Group>
 
                     <Form.Group controlId="formGridName">
@@ -238,43 +283,46 @@ const Register = ({setSignIn, setRoute, loadUser, user}) => {
                             <h4>Postcode: {postCode}</h4>
                         </div>
                 }
+
+                {changePassword
+                ?<div>
+                    <Button onClick={() => setChangePassword(false)}>Hide Password</Button>
+                    
+                    <Form.Group controlId="formGridOldPassword">
+                    <Form.Label>Current Password</Form.Label>
+                    { !oldPassword
+                        ?<Form.Text className="error" > Passwords do not match</Form.Text> 
+                        :null
+                        }
+                    <Form.Control required value={currentPassword} onChange={(input) => setCurrentPassword(input.target.value)} type="password" placeholder="Password" />
+                    </Form.Group>
+
+                    <Form.Group controlId="formGridNewPassword">
+                    <Form.Label>New Password</Form.Label>
+                    <Form.Control required value={password} onChange={(input) => setPassword(input.target.value)} type="password" placeholder="Password" />
+                    </Form.Group>
+                    
+                    <Form.Group controlId="formGridConfirmPassword">
+                    <Form.Label>Confirm New Password</Form.Label>
+                        { password !== confirmPassword
+                        ?<Form.Text className="error" > Passwords do not match</Form.Text> 
+                        :null
+                        }
+                    <Form.Control required value={confirmPassword} onChange={(input) => setConfirmPassword(input.target.value)} type="password" placeholder="Password" />
+                    <Button onClick={savePassword} variant="primary">
+                        Save Password
+                    </Button>
+                    </Form.Group>
+                </div>
+                :<Button onClick={() => setChangePassword(true)}>Change Password</Button>
+                }   
+            
             </div>
-             :null
+                :null
             } 
-
-            
-            {changePassword
-            ?<div>
-                <Button onClick={() => setChangePassword(false)}>Hide Password</Button>
                 
-                <Form.Group controlId="formGridOldPassword">
-                <Form.Label>Old Password</Form.Label>
-                <Form.Control required value={password} onChange={(input) => setPassword(input.target.value)} type="password" placeholder="Password" />
-                </Form.Group>
-
-                <Form.Group controlId="formGridNewPassword">
-                <Form.Label>New Password</Form.Label>
-                <Form.Control required value={password} onChange={(input) => setPassword(input.target.value)} type="password" placeholder="Password" />
-                </Form.Group>
-                
-                <Form.Group controlId="formGridConfirmPassword">
-                <Form.Label>Confirm New Password</Form.Label>
-                    { password !== confirmPassword
-                    ?<Form.Text className="error" > Passwords do not match</Form.Text> 
-                    :null
-                    }
-                <Form.Control required value={confirmPassword} onChange={(input) => setConfirmPassword(input.target.value)} type="password" placeholder="Password" />
-                <Button onClick={savePassword} variant="primary">
-                    Save Password
-                </Button>
-                </Form.Group>
+                </Form>
             </div>
-            :<Button onClick={() => setChangePassword(true)}>Change Password</Button>
-            }   
-                
-            
-            </Form>
-        </div>
     );
 }
 export default Register

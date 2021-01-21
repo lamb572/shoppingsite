@@ -132,7 +132,6 @@ function App() {
     }
   };
 
-  console.log(user)
 
   return (
     <div >
@@ -165,7 +164,7 @@ function App() {
                 <DetectedList filteredItems={filteredItems} basketClick={basketClick}/>
               </div>
         : route === 'basket' ?<Basket basketList={basketList} />
-        : route === 'myaccount'?<MyAccount user={user} setSignIn={setSignIn} setRoute={setRoute} loadUser={loadUser} />
+        : route === 'myaccount'?<MyAccount user={user} setRoute={setRoute} />
         :null
       }
       <Footer />
