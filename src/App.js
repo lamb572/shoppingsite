@@ -177,9 +177,8 @@ export default App;
 
 
 // TODO!!
-// my account- change information call back to SQL
 //organise my account(css)
 //build shipping table and if check box not clicked put billing info into shipping box's
 // animate the shopping basket when item added
 // adjust qty or remove items from basket
-// 
+// forgot password?? see if possible to use backend to send an email to email supplied with page link to to change the password??
