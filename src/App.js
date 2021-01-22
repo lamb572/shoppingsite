@@ -119,7 +119,7 @@ function App() {
     if (basketList.some(prod => prod.food === food)){
       setBasketList(
         basketList.map(item => {
-          let newItem = {'food':food, 'price':price, 'qty':item.qty +1, 'totalprice':item.price + price}
+          let newItem = {'food':food, 'price':price, 'qty':item.qty +1, 'totalprice':(item.qty +1)*price}
           if(item.food === food){
             return newItem
           }else{
