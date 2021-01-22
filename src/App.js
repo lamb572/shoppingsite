@@ -177,8 +177,10 @@ export default App;
 
 
 // TODO!!
-//organise my account(css)
 //build shipping table and if check box not clicked put billing info into shipping box's
 // animate the shopping basket when item added
 // adjust qty or remove items from basket
+// build backend input validation.
+// cookies to prevent logout on page refresh, cookie created randomly on back end(hash of email and date/time) only lasts 20 mins?
+    // -- also stores shopping basket to a table
 // forgot password?? see if possible to use backend to send an email to email supplied with page link to to change the password??

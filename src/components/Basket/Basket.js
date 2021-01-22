@@ -20,10 +20,10 @@ const Basket = ({basketList}) =>{
                     {basketList.map(prod =>{
                         return (
                             <tr key={prod.food}> 
-                                <th>{prod.food}</th>
-                                <th>{prod.price}</th>
-                                <th>{prod.qty}</th>
-                                <th>{prod.totalprice}</th>
+                                <td>{prod.food}</td>
+                                <td>{prod.price}</td>
+                                <td>{prod.qty}</td>
+                                <td>{prod.totalprice}</td>
                             </tr>
 
                         )
