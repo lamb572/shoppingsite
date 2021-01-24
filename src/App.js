@@ -177,7 +177,7 @@ export default App;
 
 
 // TODO!!
-//build shipping table and if check box not clicked put billing info into shipping box's
+// build shipping table and if check box not clicked put billing info into shipping box's
 // animate the shopping basket when item added
 // adjust qty or remove items from basket
 // build backend input validation.

@@ -26,7 +26,7 @@ const ChangeInfo = ({setRoute, handleSubmit, user, email, setValidated}) => {
     const saveDetails = (event) => {
         
         if (handleSubmit(event)){  
-            fetch('http://localhost:3001/updateuserinfo', {
+            fetch('https://shopping-site-api.herokuapp.com/updateuserinfo', {
                     method: 'post',
                     headers:{'Content-Type': 'application/json'},
                     body: JSON.stringify({

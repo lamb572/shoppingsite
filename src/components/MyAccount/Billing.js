@@ -26,7 +26,7 @@ const Billing =({setRoute, user, handleSubmit, setValidated, email}) =>{
 
     const saveAddress = (event) => {
         if (handleSubmit(event)){   
-            fetch('http://localhost:3001/updateaddress', {
+            fetch('https://shopping-site-api.herokuapp.com/updateaddress', {
                 method: 'post',
                 headers:{'Content-Type': 'application/json'},
                 body: JSON.stringify({
