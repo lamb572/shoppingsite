@@ -25,7 +25,7 @@ const ChangePassword =({setRoute, handleSubmit, setValidated, email}) =>{
     const savePassword = (event) => {
         setOldPassword(true);
         if (handleSubmit(event)){   
-            fetch('https://shopping-site-api.herokuapp.com/updatepassword', {
+            fetch('https://foodsite-api2.azurewebsites.net/updatepassword', {
                 method: 'post',
                 headers:{'Content-Type': 'application/json'},
                 body: JSON.stringify({

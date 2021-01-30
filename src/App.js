@@ -72,7 +72,7 @@ function App() {
 
   const onSubmit = () => {
     setItemsDetected([null])  
-    fetch('http://localhost:3001/imageurl', {
+    fetch('https://foodsite-api2.azurewebsites.net/imageurl', {
         method: 'post',
         headers:{'Content-Type': 'application/json'},
         body: JSON.stringify({

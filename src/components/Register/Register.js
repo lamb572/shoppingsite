@@ -30,7 +30,7 @@ const Register = ({setSignIn, setRoute, loadUser}) => {
         event.stopPropagation();
         }else{
             setValidated(true);
-            fetch('https://shopping-site-api.herokuapp.com/register', {
+            fetch('https://foodsite-api2.azurewebsites.net/register', {
             method: 'post',
             headers:{'Content-Type': 'application/json'},
             body: JSON.stringify({

@@ -26,7 +26,7 @@ const ChangeInfo = ({setRoute, handleSubmit, user, email, setValidated}) => {
     const saveDetails = (event) => {
         
         if (handleSubmit(event)){  
-            fetch('https://shopping-site-api.herokuapp.com/updateuserinfo', {
+            fetch('https://foodsite-api2.azurewebsites.net/updateuserinfo', {
                     method: 'post',
                     headers:{'Content-Type': 'application/json'},
                     body: JSON.stringify({
