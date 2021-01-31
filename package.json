@@ -1,6 +1,6 @@
 {
-  "name": "foodsitebootstrap",
-  
+  "name": "foodsite",
+  "homepage": "https://lukebeach.uk/foodsite",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
