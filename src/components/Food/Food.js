@@ -3,12 +3,13 @@ import addBasket from '../../images/add-to-basket.png';
 import './Food.css';
 const Food =({food, price, qty, uoi, image, keys, basketClick}) =>{
 
+
     return(
         <div className="food" key={keys.toString()}>
             <img className="item-img" alt={food} src={image}/>
             
             <dl>
-                <dt>Food:</dt>
+                <dt >Food:</dt>
                 <dd>{food}</dd> 
                 <dt>Price</dt>
                 <dd>£{price}</dd>

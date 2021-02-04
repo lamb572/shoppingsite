@@ -9,7 +9,7 @@ const FoodCards =({filterFoodList, basketClick}) =>{
             {
             filterFoodList.map((user, i) => {
               return (
-                <Food 
+                <Food key={i}
                   basketClick= {basketClick}
                   keys={i}
                   food={filterFoodList[i].food}
